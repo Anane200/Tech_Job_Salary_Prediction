@@ -1,0 +1,102 @@
+# Quick Start Guide
+
+## Prerequisites
+
+- Python 3.8 or higher
+- pip package manager
+
+## Installation Steps
+
+1. **Navigate to the project directory**
+   ```bash
+   cd ML
+   ```
+
+2. **Create a virtual environment (recommended)**
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate the virtual environment**
+   - Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
+
+4. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Running the App
+
+1. **Start the Streamlit server**
+   ```bash
+   streamlit run app.py
+   ```
+
+2. **Access the app**
+   - The app will automatically open in your default browser
+   - If not, navigate to: `http://localhost:8501`
+
+## Using the App
+
+### Making a Prediction
+
+1. Navigate to the **🔮 Prediction** tab
+2. Fill in the job details:
+   - Select job title from dropdown
+   - Adjust experience years slider
+   - Choose education level
+   - Set number of skills
+   - Select industry and company size
+   - Choose location and remote work option
+   - Set number of certifications
+3. Click **🎯 Predict Salary**
+4. View your predicted salary breakdown
+
+### Exploring Data
+
+1. Navigate to the **📊 Data Insights** tab
+2. View salary statistics and dataset overview
+3. Select different categories to see salary distributions
+
+### Viewing Model Performance
+
+1. Navigate to the **📈 Visualizations** tab
+2. Explore model performance metrics
+3. View feature importance and residual plots
+
+## Troubleshooting
+
+### Port Already in Use
+If port 8501 is already in use, run:
+```bash
+streamlit run app.py --server.port 8502
+```
+
+### Missing Dependencies
+If you encounter import errors, ensure all dependencies are installed:
+```bash
+pip install -r requirements.txt --upgrade
+```
+
+### Model Files Not Found
+Ensure the following files exist in the project directory:
+- `best_salary_model_improved.joblib`
+- `scaler_improved.joblib`
+- `Data/job_salary_prediction_dataset.csv`
+
+## Next Steps
+
+- Experiment with different input combinations
+- Explore the data insights to understand salary trends
+- Review the model visualizations to understand prediction quality
+
+## Support
+
+For issues or questions, please refer to the main README.md file.
