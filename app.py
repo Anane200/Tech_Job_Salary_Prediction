@@ -105,11 +105,139 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 def main():
+    # Load model and data
+    model, scaler = load_model()
+    df = load_data()
+    
     st.title("💰 Job Salary Prediction App")
     st.markdown("### Predict your expected salary based on job characteristics")
     st.markdown("---")
     
-    st.info("Application initialized successfully!")
+    # Sidebar
+    with st.sidebar:
+        st.header("📊 About")
+        st.info(
+            "This app uses machine learning to predict job salaries based on various factors "
+            "including experience, education, skills, and more."
+        )
+    
+    # Main content - Input form
+    st.header("Enter Job Details")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        job_title = st.selectbox(
+            "Job Title",
+            options=sorted(df['job_title'].unique()),
+            help="Select the job title"
+        )
+        
+        experience_years = st.slider(
+            "Years of Experience",
+            min_value=0,
+            max_value=20,
+            value=5,
+            help="Total years of professional experience"
+        )
+        
+        education_level = st.selectbox(
+            "Education Level",
+            options=sorted(df['education_level'].unique()),
+            help="Highest education level achieved"
+        )
+    
+    with col2:
+        skills_count = st.slider(
+            "Number of Skills",
+            min_value=1,
+            max_value=19,
+            value=10,
+            help="Total number of professional skills"
+        )
+        
+        industry = st.selectbox(
+            "Industry",
+            options=sorted(df['industry'].unique()),
+            help="Industry sector"
+        )
+        
+        company_size = st.selectbox(
+            "Company Size",
+            options=sorted(df['company_size'].unique()),
+            help="Size of the company"
+        )
+    
+    with col3:
+        location = st.selectbox(
+            "Location",
+            options=sorted(df['location'].unique()),
+            help="Work location"
+        )
+        
+        remote_work = st.selectbox(
+            "Remote Work",
+            options=sorted(df['remote_work'].unique()),
+            help="Remote work arrangement"
+        )
+        
+        certifications = st.slider(
+            "Number of Certifications",
+            min_value=0,
+            max_value=5,
+            value=2,
+            help="Total number of professional certifications"
+        )
+    
+    st.markdown("---")
+    
+    if st.button("🎯 Predict Salary"):
+        with st.spinner("Calculating prediction..."):
+            # Prepare input
+            input_data = prepare_input(
+                job_title, experience_years, education_level, skills_count,
+                industry, company_size, location, remote_work, certifications, df
+            )
+            
+            # Scale features
+            input_scaled = scaler.transform(input_data)
+            
+            # Make prediction (model predicts log salary)
+            log_prediction = model.predict(input_scaled)[0]
+            predicted_salary = np.exp(log_prediction)
+            
+            # Display results
+            st.success("✅ Prediction Complete!")
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.metric(
+                    label="Predicted Annual Salary",
+                    value=f"${predicted_salary:,.0f}",
+                    delta=None
+                )
+            
+            with col2:
+                monthly_salary = predicted_salary / 12
+                st.metric(
+                    label="Monthly Salary",
+                    value=f"${monthly_salary:,.0f}",
+                    delta=None
+                )
+            
+            with col3:
+                hourly_rate = predicted_salary / (52 * 40)
+                st.metric(
+                    label="Hourly Rate",
+                    value=f"${hourly_rate:,.2f}",
+                    delta=None
+                )
+            
+            # Salary range
+            lower_bound = predicted_salary * 0.9
+            upper_bound = predicted_salary * 1.1
+            st.info(f"💡 Estimated salary range: ${lower_bound:,.0f} - ${upper_bound:,.0f}")
 
 if __name__ == "__main__":
     main()
