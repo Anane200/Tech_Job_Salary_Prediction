@@ -11,7 +11,7 @@ from PIL import Image
 def load_model():
     """Load the trained model and scaler"""
     model = joblib.load('best_salary_model_improved.joblib')
-    #scaler = joblib.load('scaler_improved.joblib')
+    scaler = joblib.load('scaler_improved.joblib')
     return model
 
 # Load data for reference
