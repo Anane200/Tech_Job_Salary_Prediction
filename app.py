@@ -3,6 +3,20 @@ import pandas as pd
 import numpy as np
 import joblib
 
+# Load model and scaler
+@st.cache_resource
+def load_model():
+    """Load the trained model and scaler"""
+    model = joblib.load('best_salary_model_improved.joblib')
+    scaler = joblib.load('scaler_improved.joblib')
+    return model, scaler
+
+# Load data for reference
+@st.cache_data
+def load_data():
+    """Load the dataset for reference values"""
+    return pd.read_csv('Data/job_salary_prediction_dataset.csv')
+
 # Page configuration
 st.set_page_config(
     page_title="Salary Prediction App",
