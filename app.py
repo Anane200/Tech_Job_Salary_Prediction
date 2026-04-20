@@ -11,8 +11,8 @@ from PIL import Image
 def load_model():
     """Load the trained model and scaler"""
     model = joblib.load('best_salary_model_improved.joblib')
-    scaler = joblib.load('scaler_improved.joblib')
-    return model, scaler
+    #scaler = joblib.load('scaler_improved.joblib')
+    return model
 
 # Load data for reference
 @st.cache_data
@@ -76,8 +76,9 @@ def prepare_input(job_title, experience_years, education_level, skills_count,
         if col not in input_encoded.columns and col != 'salary':
             input_encoded[col] = 0
     
-    # Ensure same column order
-    input_encoded = input_encoded[df_temp_encoded.drop('salary', axis=1).columns]
+    # Ensure same column order and select only feature columns (exclude salary)
+    feature_cols = [c for c in df_temp_encoded.columns if c != 'salary']
+    input_encoded = input_encoded[feature_cols]
     
     return input_encoded
 
@@ -109,7 +110,7 @@ st.markdown("""
 
 def main():
     # Load model and data
-    model, scaler = load_model()
+    model = load_model()
     df = load_data()
     
     st.title("💰 Job Salary Prediction App")
@@ -213,10 +214,10 @@ def main():
                 )
                 
                 # Scale features
-                input_scaled = scaler.transform(input_data)
+               # input_scaled = scaler.transform(input_data)
                 
                 # Make prediction (model predicts log salary)
-                log_prediction = model.predict(input_scaled)[0]
+                log_prediction = model.predict(input_data)[0]
                 predicted_salary = np.exp(log_prediction)
                 
                 # Display results
