@@ -131,6 +131,14 @@ def main():
         )
         
         st.header("📈 Model Performance")
+        st.markdown(
+            "**Model:** XGBoost Regressor  \n"
+            "**R²:** 0.979  \n"
+            "**MAE:** ~$4,300  \n"
+            "**RMSE:** ~$5,400"
+        )
+        st.caption("Metrics on a 50,000-row held-out test set.")
+
         try:
             img = Image.open('images/model_comparison_improved.png')
             st.image(img, use_container_width=True)
