@@ -203,18 +203,14 @@ def main():
         
         if st.button("🎯 Predict Salary"):
             with st.spinner("Calculating prediction..."):
-                # Prepare input
                 input_data = prepare_input(
                     job_title, experience_years, education_level, skills_count,
                     industry, company_size, location, remote_work, certifications, df
                 )
-                
-                # Scale features
-               # input_scaled = scaler.transform(input_data)
-                
-                # Make prediction (model predicts log salary)
-                log_prediction = model.predict(input_data)[0]
-                predicted_salary = np.exp(log_prediction)
+
+                # The trained model regresses directly on raw salary, so the
+                # prediction is already in dollars — no exp() transform needed.
+                predicted_salary = float(model.predict(input_data)[0])
                 
                 # Display results
                 st.success("✅ Prediction Complete!")
