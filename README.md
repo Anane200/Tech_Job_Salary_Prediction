@@ -11,19 +11,29 @@ A machine learning-powered Streamlit application that predicts job salaries base
 
 ## Installation
 
+### Option A — Docker (recommended)
+
+One command starts everything:
+
+```bash
+docker compose up -d --build
+```
+
+The app is then available at `http://localhost:8501`. Stop with
+`docker compose down`. See `DOCKER.md` for image size, rebuild and
+deployment notes.
+
+### Option B — Local Python
+
 1. Clone or download this repository
-
 2. Install the required dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-## Usage
-
-Run the Streamlit app:
-```bash
-streamlit run app.py
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the Streamlit app:
+   ```bash
+   streamlit run app.py
+   ```
 
 The app will open in your default web browser at `http://localhost:8501`
 
