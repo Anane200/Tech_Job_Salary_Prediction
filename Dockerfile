@@ -17,7 +17,7 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip install --timeout=180 --retries=5 -r requirements.txt
 
 COPY app.py ./
 COPY best_salary_model_improved.joblib ./
