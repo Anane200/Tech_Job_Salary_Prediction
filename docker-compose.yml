@@ -1,0 +1,14 @@
+services:
+  salary-app:
+    build: .
+    image: tech-job-salary-prediction:latest
+    container_name: salary-app
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
