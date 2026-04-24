@@ -5,9 +5,19 @@ import plotly.graph_objects as go
 import plotly.express as px
 from PIL import Image
 
+MODEL_PATH = 'best_salary_model_improved.joblib'
+
+
 @st.cache_resource
 def load_model():
-    return joblib.load('best_salary_model_improved.joblib')
+    try:
+        return joblib.load(MODEL_PATH)
+    except FileNotFoundError:
+        st.error(
+            f"Model artefact '{MODEL_PATH}' not found. "
+            "Run notebook.ipynb end-to-end to regenerate it."
+        )
+        st.stop()
 
 # Load data for reference
 @st.cache_data
