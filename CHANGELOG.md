@@ -2,6 +2,40 @@
 
 All notable changes to the Job Salary Prediction App project.
 
+## [1.1.0] - 2026-04-24
+
+### Fixed
+
+- Removed bogus `np.exp` transform in the model training loop that
+  was producing overflow warnings and nonsensical
+  `predictions_original` values (the target was already raw salary).
+- Resolved `KeyError` when selecting the best model from the results
+  dataframe: `idxmax()` returned a positional index, not a model name.
+- Fixed `NameError: y_pred_best is not defined` in the residuals and
+  actual-vs-predicted cells by exposing the winning predictions from
+  the selection cell.
+- App: removed the broken log-inverse transform on predictions so
+  predicted salaries are in the correct dollar range.
+- App: stop loading an unused StandardScaler artefact that caused the
+  app to fail on startup when it was missing.
+
+### Changed
+
+- Salary-prediction target is now clearly documented as raw USD; log
+  transformation is only used for the EDA visualization.
+- Generated plots are now written to `images/` (previously the repo
+  root) so the streamlit Visualizations tab finds them.
+- Narrowed bare `except:` blocks in `app.py` to `FileNotFoundError`.
+
+### Added
+
+- Comprehensive performance reporting in the notebook: ASCII metrics
+  leaderboard, 5-fold cross-validation on the winner, MAPE + "within
+  +/-10%" coverage, and a summary markdown cell.
+- Headline model metrics panel in the streamlit sidebar.
+- Graceful "run the notebook to regenerate" error when the model
+  artefact is missing.
+
 ## [1.0.0] - 2024
 
 ### Added
