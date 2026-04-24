@@ -6,13 +6,9 @@ import plotly.graph_objects as go
 import plotly.express as px
 from PIL import Image
 
-# Load model and scaler
 @st.cache_resource
 def load_model():
-    """Load the trained model and scaler"""
-    model = joblib.load('best_salary_model_improved.joblib')
-    scaler = joblib.load('scaler_improved.joblib')
-    return model
+    return joblib.load('best_salary_model_improved.joblib')
 
 # Load data for reference
 @st.cache_data
