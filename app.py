@@ -141,7 +141,7 @@ def main():
 
         try:
             img = Image.open('images/model_comparison_improved.png')
-            st.image(img, use_container_width=True)
+            st.image(img, use_column_width=True)
         except FileNotFoundError:
             st.warning("Model comparison image not found")
     
@@ -348,14 +348,14 @@ def main():
             try:
                 st.subheader("🎯 Actual vs Predicted")
                 img = Image.open('images/actual_vs_predicted_improved.png')
-                st.image(img, use_container_width=True)
+                st.image(img, use_column_width=True)
             except FileNotFoundError:
                 st.warning("Actual vs Predicted image not found")
             
             try:
                 st.subheader("📊 Residuals Plot")
                 img = Image.open('images/residuals_improved.png')
-                st.image(img, use_container_width=True)
+                st.image(img, use_column_width=True)
             except FileNotFoundError:
                 st.warning("Residuals image not found")
         
@@ -363,14 +363,14 @@ def main():
             try:
                 st.subheader("⭐ Feature Importance")
                 img = Image.open('images/feature_importance.png')
-                st.image(img, use_container_width=True)
+                st.image(img, use_column_width=True)
             except FileNotFoundError:
                 st.warning("Feature importance image not found")
             
             try:
                 st.subheader("📈 Salary Transformation")
                 img = Image.open('images/salary_transformation.png')
-                st.image(img, use_container_width=True)
+                st.image(img, use_column_width=True)
             except FileNotFoundError:
                 st.warning("Salary transformation image not found")
 
