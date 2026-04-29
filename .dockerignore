@@ -1,0 +1,47 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python caches / virtual envs
+__pycache__
+*.py[cod]
+*.egg-info
+.venv
+venv
+env
+ENV
+
+# Notebook & its checkpoints (not needed at runtime)
+notebook.ipynb
+.ipynb_checkpoints
+
+# Docs that don't ship with the app
+README.md
+CHANGELOG.md
+QUICKSTART.md
+RUN_APP.md
+DOCKER.md
+
+# Legacy / regenerated artefacts
+scaler_improved.joblib
+model_comparison_improved.png
+residuals_improved.png
+actual_vs_predicted_improved.png
+feature_importance.png
+salary_transformation.png
+
+# IDE / OS cruft
+.vscode
+.idea
+*.swp
+.DS_Store
+Thumbs.db
+
+# Streamlit local state
+.streamlit
+
+# Docker files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore

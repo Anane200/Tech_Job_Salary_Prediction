@@ -43,3 +43,13 @@ Thumbs.db
 
 # Streamlit
 .streamlit/
+
+# Generated model artefacts (regenerate from notebook.ipynb)
+scaler_improved.joblib
+
+# Orphaned copies of generated plots at the repo root
+/model_comparison_improved.png
+/residuals_improved.png
+/actual_vs_predicted_improved.png
+/feature_importance.png
+/salary_transformation.png

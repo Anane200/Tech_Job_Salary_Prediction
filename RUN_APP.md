@@ -55,6 +55,13 @@ If it doesn't open automatically, copy and paste that URL into your browser.
 
 ## Troubleshooting
 
+### "Model artefact not found"
+The app expects `best_salary_model_improved.joblib` next to `app.py`.
+This file is produced by running `notebook.ipynb` end to end. If it
+is missing, open the notebook in Jupyter / VS Code and run all cells
+— the final cell saves the artefact. Expected performance on the
+held-out test set: **R² ≈ 0.979, MAE ≈ $4,300**.
+
 ### Python Not Found
 If you get "python is not recognized", you may need to:
 1. Install Python from https://www.python.org/downloads/
