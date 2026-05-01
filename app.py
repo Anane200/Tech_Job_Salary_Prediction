@@ -1,21 +1,23 @@
+import pickle
+
 import streamlit as st
 import pandas as pd
-import joblib
 import plotly.graph_objects as go
 import plotly.express as px
 from PIL import Image
 
-MODEL_PATH = 'best_salary_model_improved.joblib'
+MODEL_PATH = 'linear_salary_model.pkl'
 
 
 @st.cache_resource
 def load_model():
     try:
-        return joblib.load(MODEL_PATH)
+        with open(MODEL_PATH, 'rb') as f:
+            return pickle.load(f)
     except FileNotFoundError:
         st.error(
             f"Model artefact '{MODEL_PATH}' not found. "
-            "Run notebook.ipynb end-to-end to regenerate it."
+            "Run train_linear.py to regenerate it."
         )
         st.stop()
 
@@ -132,10 +134,10 @@ def main():
         
         st.header("📈 Model Performance")
         st.markdown(
-            "**Model:** XGBoost Regressor  \n"
-            "**R²:** 0.979  \n"
-            "**MAE:** ~$4,300  \n"
-            "**RMSE:** ~$5,400"
+            "**Model:** Linear Regression  \n"
+            "**R²:** 0.964  \n"
+            "**MAE:** ~$5,400  \n"
+            "**RMSE:** ~$7,100"
         )
         st.caption("Metrics on a 50,000-row held-out test set.")
 
